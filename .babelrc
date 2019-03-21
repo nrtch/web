@@ -1,0 +1,19 @@
+{
+  "presets": [
+    "next/babel",
+    "@emotion/babel-preset-css-prop"
+  ],
+  "plugins": [
+    "transform-flow-strip-types",
+    "emotion",
+    [
+      "module-resolver",
+      {
+        "root": ["./components"],
+        "alias": {
+          "helpers": "./helpers",
+        },
+      }
+    ]
+  ]
+}

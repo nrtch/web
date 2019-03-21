@@ -1,0 +1,5 @@
+{
+  "parser": "babel-flow",
+  "singleQuote": true,
+  "trailingComma": "es5"
+}
