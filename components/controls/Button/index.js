@@ -8,7 +8,12 @@ import Link from 'next/link';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 
-import { hoverScaleTransition, activeScaleTransition } from 'styles/animations';
+import {
+  hoverScaleTransition,
+  activeScaleTransition,
+  spin,
+} from 'styles/animations';
+import SpinnerIcon from 'icons/Spinner';
 
 const common = props => css`
   display: flex;
@@ -44,12 +49,18 @@ const PrimaryButton = styled.button`
   background: linear-gradient(#ff6b00, #ff2782);
   box-shadow: 0px 10px 34px rgba(240, 58, 99, 0.4);
   border: none;
+  cursor: pointer;
   ${common}
 `;
 const SecondaryButton = styled.button`
   color: #f03a63;
   border: 2px solid #f03a63;
+  cursor: pointer;
   ${common}
+`;
+
+const Spinner = styled(SpinnerIcon)`
+  animation: ${spin} 1s linear infinite;
 `;
 
 type Props = {
@@ -57,6 +68,7 @@ type Props = {
   href?: string,
   primary?: boolean,
   enabled?: boolean,
+  pending?: boolean,
   css?: any,
   className?: string,
 };
@@ -65,35 +77,44 @@ const Button = ({
   children,
   href,
   enabled = true,
+  pending,
   primary,
   css,
   className,
   ...rest
 }: Props) => {
+  const content = pending ? <Spinner /> : children;
   return href ? (
     <Link href={href} passHref {...rest}>
       {primary ? (
         <Primary css={css} className={className} enabled={enabled}>
-          {children}
+          {content}
         </Primary>
       ) : (
         <Secondary css={css} className={className} enabled={enabled}>
-          {children}
+          {content}
         </Secondary>
       )}
     </Link>
   ) : primary ? (
-    <PrimaryButton css={css} className={className} enabled={enabled} {...rest}>
-      {children}
+    <PrimaryButton
+      css={css}
+      className={className}
+      enabled={enabled}
+      disabled={!enabled}
+      {...rest}
+    >
+      {content}
     </PrimaryButton>
   ) : (
     <SecondaryButton
       css={css}
       className={className}
       enabled={enabled}
+      disabled={!enabled}
       {...rest}
     >
-      {children}
+      {content}
     </SecondaryButton>
   );
 };

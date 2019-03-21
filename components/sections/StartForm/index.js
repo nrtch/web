@@ -4,16 +4,18 @@
  */
 
 import * as React from 'react';
+import Router from 'next/router';
 import styled from '@emotion/styled';
 
 import Input from 'controls/Input';
 import Button from 'controls/Button';
 
 import { mediaQueries } from 'styles';
-import useEmailField from 'hooks/form/useEmailField';
-import usePhoneField from 'hooks/form/usePhoneField';
-import useNameField from 'hooks/form/useNameField';
-import { fadeIn } from 'styles/animations';
+import { fadeIn, appearFromTop } from 'styles/animations';
+import useStartForm from 'hooks/form/useStartForm';
+
+const failColor = '#F03A63';
+const failBgColor = '#FDE1E8';
 
 const Form = styled.form`
   display: flex;
@@ -27,6 +29,13 @@ const Form = styled.form`
     width: 500px;
   }
 `;
+const Error = styled.div`
+  padding: 13px 30px 15px;
+  color: ${failColor};
+  background-color: ${failBgColor};
+  margin-bottom: 30px;
+  animation: ${appearFromTop} 150ms ease;
+`;
 const Mark = styled.span`
   color: #000;
 `;
@@ -35,23 +44,28 @@ const Submit = styled(Button)`
   margin-top: 32px;
 `;
 
-const validateForm = (fields: { validSync: boolean }[]) => {
-  for (let i = 0; i < fields.length; i++) {
-    const f = fields[i];
-    if (f.validSync !== true) return false;
-  }
-  return true;
+const goHome = () => {
+  Router.push('/');
+  return;
 };
 
 const StartForm = () => {
-  const name = useNameField();
-  const phone = usePhoneField();
-  const email = useEmailField();
-  const canSubmit = validateForm([name, phone, email]);
+  const [fields, form] = useStartForm(goHome);
 
   return (
-    <Form>
-      <Input placeholder="Имя" {...name} />
+    <Form
+      onSubmit={e => {
+        e.preventDefault();
+        if (form.canSubmit) form.onSubmit();
+      }}
+    >
+      {form.error && (
+        <Error>
+          Ошибка. Попробуйте еще раз, или звоните нам на
+          +7&nbsp;(4012)&nbsp;5222-87
+        </Error>
+      )}
+      <Input placeholder="Имя" {...fields.name} />
       <Input
         label={
           <>
@@ -60,7 +74,7 @@ const StartForm = () => {
         }
         placeholder="+7"
         type="phone"
-        {...phone}
+        {...fields.phone}
       />
       <Input
         label={
@@ -70,9 +84,11 @@ const StartForm = () => {
         }
         placeholder="Email"
         type="email"
-        {...email}
+        {...fields.email}
       />
-      <Submit enabled={canSubmit}>Отправить</Submit>
+      <Submit enabled={form.canSubmit} pending={form.pending}>
+        Отправить
+      </Submit>
     </Form>
   );
 };

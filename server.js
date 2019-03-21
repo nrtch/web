@@ -22,9 +22,6 @@ app.prepare().then(() => {
     if (faviconFiles.includes(parsedUrl.pathname)) {
       const path = join(__dirname, 'static/favicon', parsedUrl.pathname);
       app.serveStatic(req, res, path);
-      // } else if (rootStaticFiles.includes(parsedUrl.pathname)) {
-      //   const path = join(__dirname, 'static', parsedUrl.pathname);
-      //   app.serveStatic(req, res, path);
     } else {
       handle(req, res, parsedUrl);
     }

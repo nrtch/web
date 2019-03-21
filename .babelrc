@@ -12,6 +12,7 @@
         "root": ["./components"],
         "alias": {
           "helpers": "./helpers",
+          "api": "./api",
         },
       }
     ]

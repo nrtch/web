@@ -48,3 +48,12 @@ export const appearFromRight = keyframes`
     transform: translateX(0);
   }
 `;
+
+export const spin = keyframes`
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(358deg);
+  }
+`;
