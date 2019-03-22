@@ -44,14 +44,15 @@ const Submit = styled(Button)`
   margin-top: 32px;
 `;
 
-const goHome = () => {
+const onSuccess = () => {
+  typeof window !== 'undefined' &&
+    window.localStorage.setItem('start-sent', '1');
   Router.push('/');
   return;
 };
 
 const StartForm = () => {
-  const [fields, form] = useStartForm(goHome);
-
+  const [fields, form] = useStartForm(onSuccess);
   return (
     <Form
       onSubmit={e => {
@@ -86,7 +87,7 @@ const StartForm = () => {
         type="email"
         {...fields.email}
       />
-      <Submit enabled={form.canSubmit} pending={form.pending}>
+      <Submit enabled={form.canSubmit && !form.pending} pending={form.pending}>
         Отправить
       </Submit>
     </Form>
