@@ -54,7 +54,7 @@ const Home = () => {
           body {
             font-size: 16px;
             color: #000000;
-            font-family: 'Fira Sans', sans-serif;
+            font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
             font-weight: normal;
             text-align: center;
             background-color: #f1f1f1;

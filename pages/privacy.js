@@ -12,7 +12,7 @@ import BackBar from 'controls/BackBar';
 import { fadeIn } from 'styles/animations';
 
 const H1 = styled.h1`
-  font-family: Fira Mono, monospace;
+  font-family: Fira Mono, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-weight: 500;
   font-size: 1.375em;
   letter-spacing: -0.03em;
@@ -40,7 +40,7 @@ const Home = () => (
           font-size: 16px;
           margin: 0;
           color: #000000;
-          font-family: 'Fira Sans', sans-serif;
+          font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
           font-display: swap;
         }
       `}

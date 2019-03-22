@@ -20,7 +20,7 @@ const Container = styled.div`
   }
 `;
 const A = styled.a`
-  font-family: Fira Sans, monospace;
+  font-family: Fira Sans, 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 1.0625em;

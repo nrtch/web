@@ -20,7 +20,7 @@ const common = props => css`
   justify-content: center;
   align-items: center;
   font-size: 18px;
-  font-family: 'Fira Mono', monospace;
+  font-family: 'Fira Mono', 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
   font-weight: 400;
   letter-spacing: 0.03em;
   border-radius: 18px;

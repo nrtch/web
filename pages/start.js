@@ -44,7 +44,7 @@ const Home = () => (
         body {
           font-size: 16px;
           color: #000000;
-          font-family: 'Fira Sans', sans-serif;
+          font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
           font-weight: normal;
           background-color: #fff;
           margin: 0;

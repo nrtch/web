@@ -31,14 +31,14 @@ const Label = styled.label`
   align-content: stretch;
 `;
 const LabelValue = styled.div`
-  font-family: Fira Sans, monospace;
+  font-family: Fira Sans, 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
   font-size: 0.875em;
   font-weight: normal;
   padding: 30px 30px 10px;
   color: #9c9c9c;
 `;
 const NativeInput = styled.input`
-  font-family: Fira Mono, monospace;
+  font-family: Fira Mono, 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
   font-size: 1.125em;
   font-weight: 400;
   padding: 13px 30px;
