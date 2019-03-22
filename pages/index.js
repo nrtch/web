@@ -31,7 +31,7 @@ const Home = () => {
       setThanks(true);
       window.localStorage.setItem('start-sent', '0');
       timer0 = setTimeout(() => setDone(true), 3000);
-      timer1 = setTimeout(() => setThanks(false), 5000);
+      timer1 = setTimeout(() => setThanks(false), 4000);
     }
     return () => {
       clearTimeout(timer0);
