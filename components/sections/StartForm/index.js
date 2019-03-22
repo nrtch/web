@@ -56,7 +56,7 @@ const StartForm = () => {
     <Form
       onSubmit={e => {
         e.preventDefault();
-        if (form.canSubmit) form.onSubmit();
+        form.canSubmit && form.onSubmit();
       }}
     >
       {form.error && (

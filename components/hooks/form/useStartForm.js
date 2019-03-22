@@ -10,7 +10,7 @@ import useEmailField from './useEmailField';
 import usePhoneField from './usePhoneField';
 import useNameField from './useNameField';
 
-const { useState, useRef } = React;
+const { useState, useRef, useEffect } = React;
 
 const validateForm = (fields: { validSync: boolean }[]) => {
   for (let i = 0; i < fields.length; i++) {
@@ -29,19 +29,23 @@ const useStartForm = (onSuccess?: any => any) => {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState(null);
 
-  const onSubmit = useRef<() => Promise<any>>(async () => {
-    setError(null);
-    setPending(true);
+  const onSubmit = useRef();
 
-    try {
-      const result = await start(name, phone, email);
-      onSuccess && onSuccess(result.data);
-    } catch (error) {
-      setError(error.Message || error.message || error);
-    }
+  useEffect(() => {
+    onSubmit.current = async () => {
+      setError(null);
+      setPending(true);
 
-    setPending(false);
-  });
+      try {
+        const result = await start(name.value, phone.value, email.value);
+        onSuccess && onSuccess(result.data);
+      } catch (error) {
+        setError(error.Message || error.message || error);
+      }
+
+      setPending(false);
+    };
+  }, [email, name, onSuccess, phone]);
 
   return [
     { name, phone, email },
