@@ -43,6 +43,17 @@ class MyDocument extends Document {
           <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
           <meta name="msapplication-TileColor" content="#f03a63" />
           <meta name="theme-color" content="#ffffff" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `var a = new Image();
+              a.onload = a.onerror = function() {
+                document.documentElement.className+=' '+(a.height==2?'':'no-')+'webp';
+              };
+              a.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+            `,
+            }}
+          />
+          <style>{`a { color: #f03a63; }`}</style>
           <Fonts
             list={[
               { family: 'Fira Mono', name: 'Fira Mono Regular', weight: 400 },
@@ -57,7 +68,6 @@ class MyDocument extends Document {
               { family: 'Fira Sans', name: 'Fira Sans Bold', weight: 700 },
             ]}
           />
-          <style>{`a { color: #f03a63; }`}</style>
         </Head>
         <body>
           <Main />

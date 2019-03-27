@@ -86,6 +86,7 @@ const styles = {
   phones: css`
     @media (max-width: 767px) {
       margin-top: 40px;
+      width: 100%;
     }
     ${mq[0]} {
       top: -30px;

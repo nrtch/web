@@ -59,7 +59,6 @@ const Home = () => {
             text-align: center;
             background-color: #f1f1f1;
             margin: 0;
-            font-display: swap;
             @media (min-width: 768px) {
               text-align: left;
             }

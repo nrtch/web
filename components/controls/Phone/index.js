@@ -4,42 +4,32 @@
  */
 
 import * as React from 'react';
-import { css } from '@emotion/core';
+import styled from '@emotion/styled';
 
-import frame from './iphone.png';
+import framePng from './iphone.png';
+import frame from './iphone.webp';
 
-const container = css`
-  position: relative;
+const Content = styled.div`
+  overflow: hidden;
+  height: 0;
+  padding-top: ${(1726 / 862) * 100}%;
+  background-position: center;
+  background-size: contain, 87.5%;
+  background-repeat: no-repeat;
+  background-image: url(${frame}), url(${props => props.image});
+  .no-webp & {
+    background-image: url(${framePng}), url(${props => props.fallback});
+  }
 `;
 
 type Props = {
-  image: string,
-  alt: string,
-  style?: any,
+  css?: any,
+  className?: any,
 };
 
-const Phone = ({ image, alt, style, ...rest }: Props) => (
-  <div css={[container, style]} {...rest}>
-    <img
-      src={image}
-      alt={alt}
-      css={css`
-        position: absolute;
-        top: 0;
-        left: 6.5%;
-        width: 87%;
-        transform: translateY(3%);
-      `}
-    />
-    <img
-      src={frame}
-      alt="iPhone X"
-      css={css`
-        position: relative;
-        pointer-events: none;
-        width: 100%;
-      `}
-    />
+const Phone = ({ css, className, ...rest }: Props) => (
+  <div css={css} className={className}>
+    <Content {...rest} />
   </div>
 );
 

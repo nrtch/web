@@ -63,6 +63,9 @@ const Mobile = () => (
 
 const styles = {
   phones: css`
+    @media (max-width: 767px) {
+      width: 100%;
+    }
     ${mq[0]} {
       margin: 0;
       width: calc(50% - 50px);

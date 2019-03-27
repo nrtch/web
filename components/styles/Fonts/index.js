@@ -24,6 +24,7 @@ const Fonts = ({ list }: Props) => (
           font-family: '${family}';
           font-style: normal;
           font-weight: ${weight};
+          font-display: swap;
           src: local('${Case.capital(name)}'),
               local('${Case.header(name)}'),
               url(/static/fonts/${Case.kebab(name)}.woff2) format('woff2'),

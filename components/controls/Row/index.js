@@ -26,7 +26,7 @@ const Row = styled.div`
     margin-right: 0;
     width: ${breakpoints[1]}px;
   }
-  @media (min-width: 912px) and (max-width: 1071px) {
+  @media (min-width: ${breakpoints[0]}px) and (max-width: 1071px) {
     align-self: ${props => (props.stretch ? 'stretch' : 'center')};
   }
 `;

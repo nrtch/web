@@ -8,12 +8,14 @@ import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 
 import Phone from '../Phone';
-import details from './details.png';
-import orders from './orders.png';
+import detailsPng from './details.png';
+import ordersPng from './orders.png';
+import details from './details.webp';
+import orders from './orders.webp';
 
 const screens = [
-  { image: details, alt: 'Детали операций по инструменту' },
-  { image: orders, alt: 'История сделок' },
+  { image: details, fallback: detailsPng },
+  { image: orders, fallback: ordersPng },
 ];
 const alternateScreens = screens.concat();
 alternateScreens.reverse();
@@ -65,9 +67,8 @@ const CouplaPhones = ({ alternate, style, ...rest }: Props) => (
     {(alternate ? alternateScreens : screens).map((screen, i) => (
       <Phone
         key={screen.image}
-        style={[styles.phones[i], alternate ? styles.phonesAlternate[i] : null]}
-        image={screen.image}
-        alt={screen.alt}
+        css={[styles.phones[i], alternate ? styles.phonesAlternate[i] : null]}
+        {...screen}
       />
     ))}
   </Container>
