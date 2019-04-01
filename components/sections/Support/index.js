@@ -44,7 +44,7 @@ const Column = styled.div`
 
 const Support = () => (
   <Section>
-    <Row reverse align stretch>
+    <Row reverse stretch>
       <ChatPic dialog={dialog} css={styles.pic} />
       <Column>
         <SectionTitle>Расскажем, покажем</SectionTitle>

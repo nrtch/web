@@ -20,7 +20,8 @@ const Column = styled.div`
   }
 `;
 const Phone = styled.a`
-  font-family: Fira Mono, 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
+    monospace;
   font-weight: normal;
   font-size: 1.5625em;
   letter-spacing: -0.07em;
@@ -32,7 +33,8 @@ const EmailContainer = styled.div`
 `;
 const Email = styled.a`
   margin-top: 0.8em;
-  font-family: Fira Mono, 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
+    monospace;
   font-weight: normal;
   font-size: 1.125em;
 `;

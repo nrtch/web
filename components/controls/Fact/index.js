@@ -38,7 +38,8 @@ const container = css`
 `;
 
 const Label = styled.div`
-  font-family: Fira Mono;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
+    monospace;
   font-weight: bold;
   letter-spacing: 0.05em;
   ${mq[0]} {
@@ -46,8 +47,7 @@ const Label = styled.div`
   }
 `;
 const Value = styled.div`
-  font-family: Fira Sans;
-  font-weight: 300;
+  font-weight: 200;
   font-size: 2.625em;
   letter-spacing: -0.03em;
   margin-top: 8px;

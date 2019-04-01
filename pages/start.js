@@ -5,7 +5,7 @@
 
 import * as React from 'react';
 import Head from 'next/head';
-import { Global, css } from '@emotion/core';
+// import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
 
 import BackBar from 'controls/BackBar';
@@ -39,22 +39,6 @@ const Home = () => (
     <Head>
       <title>Подключить NEXX</title>
     </Head>
-    <Global
-      styles={css`
-        body {
-          font-size: 16px;
-          color: #000000;
-          font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
-          font-weight: normal;
-          background-color: #fff;
-          margin: 0;
-          font-display: swap;
-          @media (min-width: 768px) {
-            text-align: left;
-          }
-        }
-      `}
-    />
     <Container>
       <BackBar />
       <Content>

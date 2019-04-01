@@ -14,7 +14,8 @@ type Props = {
 const Button = styled.a`
   display: flex;
   align-items: center;
-  font-family: Fira Sans, 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
+    monospace;
   font-style: normal;
   font-weight: normal;
   font-size: 1.0625em;

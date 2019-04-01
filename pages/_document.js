@@ -5,7 +5,7 @@
 
 import * as React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import Fonts from 'styles/Fonts';
+// import Fonts from 'styles/Fonts';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: any) {
@@ -53,8 +53,24 @@ class MyDocument extends Document {
             `,
             }}
           />
-          <style>{`a { color: #f03a63; }`}</style>
-          <Fonts
+          <style>{`
+            body {
+              background-color: #fff;
+              margin: 0;
+              font-size: 16px;
+              font-weight: normal;
+              font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+              color: #000000;
+              text-align: center;
+            }
+            @media (min-width: 768px) {
+              body { text-align: left; }
+            }
+            a {
+              color: #f03a63;
+            }
+          `}</style>
+          {/* <Fonts
             list={[
               { family: 'Fira Mono', name: 'Fira Mono Regular', weight: 400 },
               { family: 'Fira Mono', name: 'Fira Mono Medium', weight: 500 },
@@ -67,7 +83,7 @@ class MyDocument extends Document {
               { family: 'Fira Sans', name: 'Fira Sans Book', weight: 400 },
               { family: 'Fira Sans', name: 'Fira Sans Bold', weight: 700 },
             ]}
-          />
+          /> */}
         </Head>
         <body>
           <Main />

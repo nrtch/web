@@ -20,7 +20,8 @@ const Container = styled.div`
   }
 `;
 const A = styled.a`
-  font-family: Fira Sans, 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
+    monospace;
   font-style: normal;
   font-weight: normal;
   font-size: 1.0625em;

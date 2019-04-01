@@ -15,7 +15,6 @@ const NativeInput = styled.input`
   margin-right: 10px;
 `;
 const LabelValue = styled.span`
-  font-family: Fira Sans, 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
   font-size: 0.875em;
   font-weight: normal;
   flex: 1;

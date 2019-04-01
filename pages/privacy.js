@@ -5,14 +5,12 @@
 
 import * as React from 'react';
 import Head from 'next/head';
-import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
 
 import BackBar from 'controls/BackBar';
 import { fadeIn } from 'styles/animations';
 
 const H1 = styled.h1`
-  font-family: Fira Mono, "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   font-weight: 500;
   font-size: 1.375em;
   letter-spacing: -0.03em;
@@ -34,17 +32,6 @@ const Home = () => (
     <Head>
       <title>Политика использования персональных данных в NEXX</title>
     </Head>
-    <Global
-      styles={css`
-        body {
-          font-size: 16px;
-          margin: 0;
-          color: #000000;
-          font-family: 'Fira Sans', Helvetica, Arial, sans-serif;
-          font-display: swap;
-        }
-      `}
-    />
     <BackBar />
     <Text>
       <H1>Согласие на обработку персональных данных</H1>
