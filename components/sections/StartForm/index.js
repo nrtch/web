@@ -55,8 +55,10 @@ const Privacy = styled.a`
 `;
 
 const onSuccess = () => {
-  typeof window !== 'undefined' &&
+  if (typeof window !== 'undefined') {
     window.localStorage.setItem('start-sent', '1');
+    window.localStorage.setItem('start-section', 'direct');
+  }
   Router.push('/');
   return;
 };

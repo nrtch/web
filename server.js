@@ -32,7 +32,8 @@ app.prepare().then(() => {
         From: 'welcome@nt.company',
         To: 'welcome@nt.company',
         Subject: 'Запрос на подключение NEXX 🚀',
-        HtmlBody: `<strong>имя:</strong> ${name}<br/><strong>телефон:</strong> ${phone}<br/><strong>email:</strong> ${email}<br/><br/>Кнопка в блоке: ${section}`,
+        HtmlBody: `<strong>имя:</strong> ${name}<br/><strong>телефон:</strong> ${phone}<br/><strong>email:</strong> ${email}<br/><br/>Источник на сайте: ${section ||
+          'direct'}`,
       });
       return res.status(200).json({ status: 200, message: 'OK' });
     } catch (e) {
