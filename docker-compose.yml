@@ -3,7 +3,7 @@ version: '3.7'
 #-----------------------------------------------------------------------
 services:
 #-----------------------------------------------------------------------
-  python:
+  nexx_me_front:
     image: ${repoUser}/${repoName}:${appName}
     command: yarn start -p 8080
     deploy:
