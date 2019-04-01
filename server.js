@@ -27,12 +27,12 @@ app.prepare().then(() => {
 
   server.post('/api/register', async (req, res) => {
     try {
-      const { name, phone, email } = req.body;
+      const { name, phone, email, section } = req.body;
       await postmarkClient.sendEmail({
         From: 'welcome@nt.company',
         To: 'welcome@nt.company',
-        Subject: 'Подключаю NEXX! 🔥 SUTATO!!! 🚀',
-        HtmlBody: `<strong>Запрос на подключение NEXX</strong><br/><br/><strong>имя:</strong> ${name}<br/><strong>телефон:</strong> ${phone}<br/><strong>email:</strong> ${email}`,
+        Subject: 'Запрос на подключение NEXX 🚀',
+        HtmlBody: `<strong>имя:</strong> ${name}<br/><strong>телефон:</strong> ${phone}<br/><strong>email:</strong> ${email}<br/><br/>Кнопка в блоке: ${section}`,
       });
       return res.status(200).json({ status: 200, message: 'OK' });
     } catch (e) {

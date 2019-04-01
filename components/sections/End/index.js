@@ -14,7 +14,11 @@ const End = () => (
   <Section highlighted>
     <SectionTitle plain>Ну что, приступим?</SectionTitle>
     <Text>Инвестируйте с интеллектом. Подключайте NEXX!</Text>
-    <Button href="/start" primary>
+    <Button
+      href="/start"
+      onClick={() => window.localStorage.setItem('start-section', 'end')}
+      primary
+    >
       Подключить
     </Button>
   </Section>

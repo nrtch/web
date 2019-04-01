@@ -5,14 +5,18 @@
 
 import * as React from 'react';
 import Router from 'next/router';
+import Link from 'next/link';
 import styled from '@emotion/styled';
 
 import Input from 'controls/Input';
 import Button from 'controls/Button';
+import Checkbox from 'controls/Checkbox';
 
 import { mediaQueries } from 'styles';
 import { fadeIn, appearFromTop } from 'styles/animations';
 import useStartForm from 'hooks/form/useStartForm';
+
+const { useState } = React;
 
 const failColor = '#F03A63';
 const failBgColor = '#FDE1E8';
@@ -39,9 +43,15 @@ const Error = styled.div`
 const Mark = styled.span`
   color: #000;
 `;
+const Agreement = styled(Checkbox)`
+  margin: 0;
+`;
 const Submit = styled(Button)`
   align-self: center;
   margin-top: 32px;
+`;
+const Privacy = styled.a`
+  color: inherit;
 `;
 
 const onSuccess = () => {
@@ -51,8 +61,14 @@ const onSuccess = () => {
   return;
 };
 
-const StartForm = () => {
-  const [fields, form] = useStartForm(onSuccess);
+type Props = {
+  section?: string,
+};
+
+const StartForm = ({ section }: Props) => {
+  const [fields, form] = useStartForm(onSuccess, { section });
+  const [agreed, setAgreed] = useState(false);
+
   return (
     <Form
       onSubmit={e => {
@@ -87,7 +103,18 @@ const StartForm = () => {
         type="email"
         {...fields.email}
       />
-      <Submit enabled={form.canSubmit && !form.pending} pending={form.pending}>
+      <Agreement onChange={e => setAgreed(e.currentTarget.checked)}>
+        Я соглашаюсь с{' '}
+        <Link href="/privacy" passHref>
+          <Privacy target="_blank">
+            политикой использования персональных данных
+          </Privacy>
+        </Link>
+      </Agreement>
+      <Submit
+        enabled={form.canSubmit && !form.pending && agreed}
+        pending={form.pending}
+      >
         Отправить
       </Submit>
     </Form>

@@ -58,10 +58,16 @@ const Home = () => (
     <Container>
       <BackBar />
       <Content>
-        <StartForm />
+        <StartForm
+          section={
+            typeof window !== 'undefined'
+              ? window.localStorage.getItem('start-section')
+              : undefined
+          }
+        />
       </Content>
     </Container>
   </>
 );
 
-export default Home;
+export default React.memo<{}>(Home);

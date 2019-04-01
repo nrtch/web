@@ -20,7 +20,7 @@ const validateForm = (fields: { validSync: boolean }[]) => {
   return true;
 };
 
-const useStartForm = (onSuccess?: any => any) => {
+const useStartForm = (onSuccess?: any => any, params?: { [string]: any }) => {
   const name = useNameField();
   const phone = usePhoneField();
   const email = useEmailField();
@@ -37,7 +37,12 @@ const useStartForm = (onSuccess?: any => any) => {
       setPending(true);
 
       try {
-        const result = await start(name.value, phone.value, email.value);
+        const result = await start(
+          name.value,
+          phone.value,
+          email.value,
+          params
+        );
         onSuccess && onSuccess(result.data);
       } catch (error) {
         setError(error.Message || error.message || error);
@@ -45,7 +50,7 @@ const useStartForm = (onSuccess?: any => any) => {
 
       setPending(false);
     };
-  }, [email, name, onSuccess, phone]);
+  }, [email, name, onSuccess, params, phone]);
 
   return [
     { name, phone, email },

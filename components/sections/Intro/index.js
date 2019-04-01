@@ -46,7 +46,11 @@ const Intro = () => (
           Технологии искусственного интеллекта в вашем телефоне формируют доход
           от 5% в месяц.
         </Text>
-        <Button href="/start" primary>
+        <Button
+          href="/start"
+          onClick={() => window.localStorage.setItem('start-section', 'intro')}
+          primary
+        >
           Подключить
         </Button>
       </Column>

@@ -4,7 +4,7 @@
  */
 
 import * as React from 'react';
-import Link from 'next/link';
+import Router from 'next/router';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 
@@ -33,31 +33,34 @@ const common = props => css`
   ${activeScaleTransition}
 `;
 
-const Primary = styled.a`
-  color: #fff;
-  background: linear-gradient(#ff6b00, #ff2782);
-  box-shadow: 0px 10px 34px rgba(240, 58, 99, 0.4);
+const Link = styled.a`
   ${common}
 `;
-const Secondary = styled.a`
-  border: 2px solid #f03a63;
+const NativeButton = styled.button`
   ${common}
 `;
-
-const PrimaryButton = styled.button`
-  color: #fff;
-  background: linear-gradient(#ff6b00, #ff2782);
-  box-shadow: 0px 10px 34px rgba(240, 58, 99, 0.4);
-  border: none;
-  cursor: pointer;
-  ${common}
-`;
-const SecondaryButton = styled.button`
-  color: #f03a63;
-  border: 2px solid #f03a63;
-  cursor: pointer;
-  ${common}
-`;
+const styles = {
+  primary: css`
+    color: #fff;
+    background: linear-gradient(#ff6b00, #ff2782);
+    box-shadow: 0px 10px 34px rgba(240, 58, 99, 0.4);
+  `,
+  secondary: css`
+    border: 2px solid #f03a63;
+  `,
+  primaryButton: css`
+    color: #fff;
+    background: linear-gradient(#ff6b00, #ff2782);
+    box-shadow: 0px 10px 34px rgba(240, 58, 99, 0.4);
+    border: none;
+    cursor: pointer;
+  `,
+  secondaryButton: css`
+    color: #f03a63;
+    border: 2px solid #f03a63;
+    cursor: pointer;
+  `,
+};
 
 const Spinner = styled(SpinnerIcon)`
   animation: ${spin} 1s linear infinite;
@@ -66,6 +69,7 @@ const Spinner = styled(SpinnerIcon)`
 type Props = {
   children: React.Node,
   href?: string,
+  onClick?: any => any,
   primary?: boolean,
   enabled?: boolean,
   pending?: boolean,
@@ -76,6 +80,7 @@ type Props = {
 const Button = ({
   children,
   href,
+  onClick,
   enabled = true,
   pending,
   primary,
@@ -85,37 +90,30 @@ const Button = ({
 }: Props) => {
   const content = pending ? <Spinner /> : children;
   return href ? (
-    <Link href={href} passHref {...rest}>
-      {primary ? (
-        <Primary css={css} className={className} enabled={enabled}>
-          {content}
-        </Primary>
-      ) : (
-        <Secondary css={css} className={className} enabled={enabled}>
-          {content}
-        </Secondary>
-      )}
+    <Link
+      css={[primary ? styles.primary : styles.secondary, css]}
+      href={href}
+      onClick={e => {
+        e.preventDefault();
+        onClick && onClick();
+        Router.push(href);
+      }}
+      className={className}
+      enabled={enabled}
+    >
+      {content}
     </Link>
-  ) : primary ? (
-    <PrimaryButton
-      css={css}
-      className={className}
-      enabled={enabled}
-      disabled={!enabled}
-      {...rest}
-    >
-      {content}
-    </PrimaryButton>
   ) : (
-    <SecondaryButton
-      css={css}
+    <NativeButton
+      css={[primary ? styles.primaryButton : styles.secondaryButton, css]}
       className={className}
       enabled={enabled}
       disabled={!enabled}
+      onClick={onClick}
       {...rest}
     >
       {content}
-    </SecondaryButton>
+    </NativeButton>
   );
 };
 
