@@ -23,7 +23,22 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying ...'
-        sh 'envsubst \'$appHost,$appName\' < nginx.conf > /var/letsencrypt/site-confs/${appName}'
+        sh 'envsubst \'$appHost,$appName\' < ${env.BRANCH_NAME == 'master' ? 'prod' : 'dev'}.nginx.conf > /var/letsencrypt/site-confs/${appName}'
+
+        // script {
+        //   if (env.BRANCH_NAME == 'dev') {
+        //     sh 'cp .htpasswd /var/letsencrypt/etc/${appName}.htpasswd'
+        //   }
+        // }
+
+        when {
+          branch 'dev'
+        }
+        steps {
+          echo 'DEVELOPMENT'
+          sh 'cp .htpasswd /var/letsencrypt/etc/${appName}.htpasswd'
+        }
+
         sh 'docker stack deploy --prune --with-registry-auth --compose-file docker-compose.yml ${appName}'
         sh 'docker exec $(docker ps | grep letsencrypt | grep -Eo \'(^[0-9a-z]{12})\') kill -HUP $(docker exec $(docker ps | grep letsencrypt | grep -Eo \'(^[0-9a-z]{12})\') ps -o pid,args | grep master | grep -Eo \'^ +([0-9]+) +\')'
         echo 'Deployed'
@@ -31,10 +46,15 @@ pipeline {
     }
   }
   environment {
-    appName = 'nexx_me_front'
-    appHost = 'nexx.me'
-    repoUser = 'ntnexx' // Docker Hub login
-    repoName = 'api' // Docker Hub repo name
-    deployNode = 'prod-node-1' // Swarm node to place the app, e.g. prod-node-1
+    // Unique name
+    appName = env.BRANCH_NAME == 'master' ? 'nexx_me_front' : 'nexx_me_front_dev'
+    // Domain address
+    appHost = env.BRANCH_NAME == 'master' ? 'nexx.me' : 'dev.nexx.me'
+    // Docker Hub login
+    repoUser = 'ntnexx'
+    // Docker Hub repo name
+    repoName = 'api'
+    // Swarm node to place the app
+    deployNode = env.BRANCH_NAME == 'master' ? 'prod-node-1' : 'dev-node-1'
   }
 }
