@@ -1,14 +1,12 @@
 pipeline {
   agent any
-  parameters {
-    password(name: 'repoPass', description: 'Docker repository password')
-  }
   stages {
     stage('Build') {
       steps {
         echo 'Building ...'
         sh 'docker build . --file Dockerfile -t ${repoUser}/${repoName}:${appName}'
-        sh 'docker login -u ${repoUser} -p ${repoPass}'
+        // dockerRepoPass is a global secret added in UI
+        sh 'docker login -u ${repoUser} -p ${dockerRepoPass}'
         sh 'docker push ${repoUser}/${repoName}:${appName}'
         sh 'docker rmi ${repoUser}/${repoName}:${appName}'
         sh 'docker system prune -f'
