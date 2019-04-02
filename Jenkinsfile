@@ -8,9 +8,10 @@ pipeline {
   stages {
     stage('Setup') {
       steps {
-        echo "Setting up pipeline environment ... ${env.dockerRepoPass} ${env.BRANCH_NAME}"
+        echo "Setting up pipeline environment: ${dockerRepoPass} ${env.dockerRepoPass} ${env.BRANCH_NAME}"
         echo env.BRANCH_NAME
         echo env.dockerRepoPass
+        echo dockerRepoPass
         // script {
         //   if (env.BRANCH_NAME == 'master') {
         //     appName = 'nexx_me_front'
@@ -26,7 +27,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        echo 'Building ... ${env.dockerRepoPass} ${env.BRANCH_NAME}'
+        echo "Building ... ${env.dockerRepoPass} ${env.BRANCH_NAME}"
         sh 'docker build . --file Dockerfile -t ${repoUser}/${repoName}:${appName}'
         // dockerRepoPass is a global secret added in UI
         sh 'docker login -u ${repoUser} -p ${env.dockerRepoPass}'
