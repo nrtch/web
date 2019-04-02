@@ -2,36 +2,16 @@ def appName = env.BRANCH_NAME == 'master' ? 'nexx_me_front' : 'nexx_me_front_dev
 def appHost = env.BRANCH_NAME == 'master' ? 'nexx.me' : 'dev.nexx.me'
 def deployNode = env.BRANCH_NAME == 'master' ? 'prod-node-1' : 'dev-node-1'
 def nginxConf = env.BRANCH_NAME == 'master' ? 'prod.nginx.conf' : 'dev.nginx.conf'
-def pass = credentials('dockerRepoPass')
 
 pipeline {
   agent any
   stages {
-    stage('Setup') {
-      steps {
-        echo "Setting up pipeline environment: ${pass} ${dockerRepoPass} ${env.dockerRepoPass} ${env.BRANCH_NAME}"
-        echo env.BRANCH_NAME
-        echo env.dockerRepoPass
-        echo dockerRepoPass
-        // script {
-        //   if (env.BRANCH_NAME == 'master') {
-        //     appName = 'nexx_me_front'
-        //     appHost = 'nexx.me'
-        //     deployNode = 'prod-node-1'
-        //   } else {
-        //     appName = 'nexx_me_front_dev'
-        //     appHost = 'dev.nexx.me'
-        //     deployNode = 'dev-node-1'
-        //   }
-        // }
-      }
-    }
     stage('Build') {
       steps {
-        echo "Building ... ${env.dockerRepoPass} ${env.BRANCH_NAME}"
+        echo "Building ... ${dockerRepoPass}"
         sh 'docker build . --file Dockerfile -t ${repoUser}/${repoName}:${appName}'
-        // dockerRepoPass is a global secret added in UI
-        sh 'docker login -u ${repoUser} -p ${env.dockerRepoPass}'
+        // dockerRepoPass is a global env var added in UI
+        sh 'docker login -u ${repoUser} -p ${dockerRepoPass}'
         sh 'docker push ${repoUser}/${repoName}:${appName}'
         sh 'docker rmi ${repoUser}/${repoName}:${appName}'
         sh 'docker system prune -f'
@@ -48,18 +28,13 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying ...'
-        when {
-          branch 'master'
-        }
-        steps {
-          sh 'envsubst \'$appHost,$appName\' < ${nginxConf} > /var/letsencrypt/site-confs/${appName}'
-        }
 
         // script {
         //   if (env.BRANCH_NAME == 'dev') {
         //     sh 'cp .htpasswd /var/letsencrypt/etc/${appName}.htpasswd'
         //   }
         // }
+        sh 'envsubst \'$appHost,$appName\' < ${nginxConf} > /var/letsencrypt/site-confs/${appName}'
 
         when {
           branch 'dev'
@@ -68,6 +43,7 @@ pipeline {
           echo 'DEVELOPMENT'
           sh 'cp .htpasswd /var/letsencrypt/etc/${appName}.htpasswd'
         }
+
         when {
           branch 'master'
         }
