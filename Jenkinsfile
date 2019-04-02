@@ -2,13 +2,14 @@ def appName = env.BRANCH_NAME == 'master' ? 'nexx_me_front' : 'nexx_me_front_dev
 def appHost = env.BRANCH_NAME == 'master' ? 'nexx.me' : 'dev.nexx.me'
 def deployNode = env.BRANCH_NAME == 'master' ? 'prod-node-1' : 'dev-node-1'
 def nginxConf = env.BRANCH_NAME == 'master' ? 'prod.nginx.conf' : 'dev.nginx.conf'
+def pass = credentials('dockerRepoPass')
 
 pipeline {
   agent any
   stages {
     stage('Setup') {
       steps {
-        echo "Setting up pipeline environment: ${dockerRepoPass} ${env.dockerRepoPass} ${env.BRANCH_NAME}"
+        echo "Setting up pipeline environment: ${pass} ${dockerRepoPass} ${env.dockerRepoPass} ${env.BRANCH_NAME}"
         echo env.BRANCH_NAME
         echo env.dockerRepoPass
         echo dockerRepoPass
