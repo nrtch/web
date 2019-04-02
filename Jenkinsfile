@@ -1,22 +1,22 @@
-def _appName = env.BRANCH_NAME == 'master' ? 'nexx_me_front' : 'nexx_me_front_dev'
-def _appHost = env.BRANCH_NAME == 'master' ? 'nexx.me' : 'dev.nexx.me'
-def _deployNode = env.BRANCH_NAME == 'master' ? 'prod-node-1' : 'dev-node-1'
-def _nginxConf = env.BRANCH_NAME == 'master' ? 'prod.nginx.conf' : 'dev.nginx.conf'
+def appName = env.BRANCH_NAME == 'master' ? 'nexx_me_front' : 'nexx_me_front_dev'
+def appHost = env.BRANCH_NAME == 'master' ? 'nexx.me' : 'dev.nexx.me'
+def deployNode = env.BRANCH_NAME == 'master' ? 'prod-node-1' : 'dev-node-1'
+def nginxConf = env.BRANCH_NAME == 'master' ? 'prod.nginx.conf' : 'dev.nginx.conf'
 
 pipeline {
   agent any
   environment {
     // Unique name
-    appName = _appName
-    // Domain address
-    appHost = _appHost
+    // appName = _appName
+    // // Domain address
+    // appHost = _appHost
     // Docker Hub login
     repoUser = 'ntnexx'
     // Docker Hub repo name
     repoName = 'api'
     // Swarm node to place the app
-    deployNode = _deployNode
-    nginxConf = _nginxConf
+    // deployNode = _deployNode
+    // nginxConf = _nginxConf
   }
   stages {
     stage('Build') {
