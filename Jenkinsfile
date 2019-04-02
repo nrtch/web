@@ -8,7 +8,9 @@ pipeline {
   stages {
     stage('Setup') {
       steps {
-        echo 'Setting up pipeline environment ...'
+        echo "Setting up pipeline environment ... ${env.dockerRepoPass} ${env.BRANCH_NAME}"
+        echo env.BRANCH_NAME
+        echo env.dockerRepoPass
         // script {
         //   if (env.BRANCH_NAME == 'master') {
         //     appName = 'nexx_me_front'
