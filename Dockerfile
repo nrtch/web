@@ -1,5 +1,5 @@
 # Base image
-FROM python
+FROM node
 
 # Place source code to container image folder
 ADD . /var/app/
