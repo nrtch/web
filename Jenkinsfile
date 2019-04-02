@@ -1,6 +1,7 @@
 def appName = env.BRANCH_NAME == 'master' ? 'nexx_me_front' : 'nexx_me_front_dev'
 def appHost = env.BRANCH_NAME == 'master' ? 'nexx.me' : 'dev.nexx.me'
 def deployNode = env.BRANCH_NAME == 'master' ? 'prod-node-1' : 'dev-node-1'
+def nginxConf = env.BRANCH_NAME == 'master' ? 'prod.nginx.conf' : 'dev.nginx.conf'
 
 pipeline {
   agent any
@@ -43,7 +44,12 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying ...'
-        sh 'envsubst \'$appHost,$appName\' < ${env.BRANCH_NAME == 'master' ? 'prod' : 'dev'}.nginx.conf > /var/letsencrypt/site-confs/${appName}'
+        when {
+          branch 'master'
+        }
+        steps {
+          sh 'envsubst \'$appHost,$appName\' < ${nginxConf} > /var/letsencrypt/site-confs/${appName}'
+        }
 
         // script {
         //   if (env.BRANCH_NAME == 'dev') {
