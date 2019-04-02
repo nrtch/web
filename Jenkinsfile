@@ -38,6 +38,12 @@ pipeline {
           echo 'DEVELOPMENT'
           sh 'cp .htpasswd /var/letsencrypt/etc/${appName}.htpasswd'
         }
+        when {
+          branch 'master'
+        }
+        steps {
+          echo 'PRODUCTION'
+        }
 
         sh 'docker stack deploy --prune --with-registry-auth --compose-file docker-compose.yml ${appName}'
         sh 'docker exec $(docker ps | grep letsencrypt | grep -Eo \'(^[0-9a-z]{12})\') kill -HUP $(docker exec $(docker ps | grep letsencrypt | grep -Eo \'(^[0-9a-z]{12})\') ps -o pid,args | grep master | grep -Eo \'^ +([0-9]+) +\')'
