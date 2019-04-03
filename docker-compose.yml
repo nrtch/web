@@ -3,7 +3,7 @@ version: '3.7'
 #-----------------------------------------------------------------------
 services:
 #-----------------------------------------------------------------------
-  nexx_me_front:
+  ${appName}:
     image: ${repoUser}/${repoName}:${appName}
     command: PORT=8080 yarn start
     deploy:

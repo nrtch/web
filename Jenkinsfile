@@ -25,8 +25,6 @@ pipeline {
     stage('Build') {
       steps {
         echo "Building ... ${dockerRepoPass}"
-        echo "docker build . --file Dockerfile -t ${repoUser}/${repoName}:${appName}"
-        echo 'docker build . --file Dockerfile -t ${repoUser}/${repoName}:${appName}'
         sh 'docker build . --file Dockerfile -t ${repoUser}/${repoName}:${appName}'
         // dockerRepoPass is a global env var added in UI
         sh 'docker login -u ${repoUser} -p ${dockerRepoPass}'
