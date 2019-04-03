@@ -46,7 +46,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying ...'
-        sh 'sed -e "s|\${appHost}|$appHost|" -e "s|\${appName}|$appName|" ${nginxConf} > /var/letsencrypt/site-confs/${appName}'
+        sh 'sed -e "s|\\${appHost}|$appHost|" -e "s|\\${appName}|$appName|" ${nginxConf} > /var/letsencrypt/site-confs/${appName}'
         script {
           if (env.BRANCH_NAME != 'master') {
             sh 'cp .htpasswd /var/letsencrypt/etc/${appName}.htpasswd'
