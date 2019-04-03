@@ -55,7 +55,8 @@ pipeline {
         //     sh 'cp .htpasswd /var/letsencrypt/etc/${appName}.htpasswd'
         //   }
         // }
-        sh 'envsubst \'$appHost,$appName\' < ${nginxConf} > /var/letsencrypt/site-confs/${appName}'
+        // sh 'envsubst \'$appHost,$appName\' < ${nginxConf} > /var/letsencrypt/site-confs/${appName}'
+        sh 'sed -e "s|\${appHost}|$appHost|" -e "s|\${appName}|$appName|" ${nginxConf} > /var/letsencrypt/site-confs/${appName}'
 
         when {
           branch 'dev'

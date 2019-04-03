@@ -1,11 +1,11 @@
 # Base image
 FROM node
 
-RUN \
-  apt-get update \
-  && apt-get -y install gettext-base \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+# RUN \
+#   apt-get update \
+#   && apt-get -y install gettext-base \
+#   && apt-get clean \
+#   && rm -rf /var/lib/apt/lists/*
 
 # Place source code to container image folder
 ADD . /var/app/
