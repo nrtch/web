@@ -5,7 +5,7 @@ services:
 #-----------------------------------------------------------------------
   nexx_me_front:
     image: ${repoUser}/${repoName}:${appName}
-    command: yarn start -p 8080
+    command: PORT=8080 yarn start
     deploy:
       mode: replicated
       replicas: 2
