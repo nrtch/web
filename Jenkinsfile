@@ -1,26 +1,23 @@
 pipeline {
   agent any
   environment {
-    // Unique name
-    // appName = _appName
-    // // Domain address
-    // appHost = _appHost
     // Docker Hub login
     repoUser = 'ntnexx'
     // Docker Hub repo name
     repoName = 'api'
-    // Swarm node to place the app
-    // deployNode = _deployNode
-    // nginxConf = _nginxConf
   }
   stages {
     stage('Setup') {
       steps {
         echo 'Setting up environment variables ...'
         script {
+          // Unique app name
           env.appName = env.BRANCH_NAME == 'master' ? 'nexx_me_front' : 'nexx_me_front_dev'
+          // App domain address
           env.appHost = env.BRANCH_NAME == 'master' ? 'nexx.me' : 'dev.nexx.me'
+          // Swarm node to place the app into
           env.deployNode = env.BRANCH_NAME == 'master' ? 'prod-node-1' : 'dev-node-1'
+          // Nginx configuration file
           env.nginxConf = env.BRANCH_NAME == 'master' ? 'prod.nginx.conf' : 'dev.nginx.conf'
         }
       }
@@ -49,46 +46,16 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'Deploying ...'
-
-        // script {
-        //   if (env.BRANCH_NAME == 'dev') {
-        //     sh 'cp .htpasswd /var/letsencrypt/etc/${appName}.htpasswd'
-        //   }
-        // }
-        // sh 'envsubst \'$appHost,$appName\' < ${nginxConf} > /var/letsencrypt/site-confs/${appName}'
         sh 'sed -e "s|\${appHost}|$appHost|" -e "s|\${appName}|$appName|" ${nginxConf} > /var/letsencrypt/site-confs/${appName}'
-
-        when {
-          branch 'dev'
+        script {
+          if (env.BRANCH_NAME != 'master') {
+            sh 'cp .htpasswd /var/letsencrypt/etc/${appName}.htpasswd'
+          }
         }
-        steps {
-          echo 'DEVELOPMENT'
-          sh 'cp .htpasswd /var/letsencrypt/etc/${appName}.htpasswd'
-        }
-
-        when {
-          branch 'master'
-        }
-        steps {
-          echo 'PRODUCTION'
-        }
-
         sh 'docker stack deploy --prune --with-registry-auth --compose-file docker-compose.yml ${appName}'
         sh 'docker exec $(docker ps | grep letsencrypt | grep -Eo \'(^[0-9a-z]{12})\') kill -HUP $(docker exec $(docker ps | grep letsencrypt | grep -Eo \'(^[0-9a-z]{12})\') ps -o pid,args | grep master | grep -Eo \'^ +([0-9]+) +\')'
         echo 'Deployed'
       }
     }
   }
-  // environment {
-  //   // Unique name
-  //   // appName = env.BRANCH_NAME == 'master' ? 'nexx_me_front' : 'nexx_me_front_dev'
-  //   // Domain address
-  //   // appHost = env.BRANCH_NAME == 'master' ? 'nexx.me' : 'dev.nexx.me'
-  //   // Docker Hub login
-  //   repoUser = 'ntnexx'
-  //   // Docker Hub repo name
-  //   repoName = 'api'
-  //   // Swarm node to place the app
-  //   // deployNode = env.BRANCH_NAME == 'master' ? 'prod-node-1' : 'dev-node-1'
-  // }
 }
