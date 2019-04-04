@@ -5,7 +5,9 @@ services:
 #-----------------------------------------------------------------------
   ${appName}:
     image: ${repoUser}/${repoName}:${appName}
-    command: POSTMARK_KEY="${postmarkKey}" yarn start
+    command: yarn start
+    environment:
+      - POSTMARK_KEY="${postmarkKey}"
     deploy:
       mode: replicated
       replicas: 2
