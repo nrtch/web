@@ -50,7 +50,9 @@ pipeline {
             sh 'cp .htpasswd /var/letsencrypt/etc/${appName}.htpasswd'
           }
         }
-        // sh 'sed -e "s|\\${appName}|$appName|" docker-compose.yml > docker-compose.yml'
+        sh 'cp docker-compose.yml docker-compose.yml.tmp'
+        sh 'sed -e "s|\\${appName}|$appName|" docker-compose.yml.tmp > docker-compose.yml'
+        sh 'rm -rf docker-compose.yml.tmp'
         sh 'docker stack deploy --prune --with-registry-auth --compose-file docker-compose.yml ${appName}'
         sh 'docker exec $(docker ps | grep letsencrypt | grep -Eo \'(^[0-9a-z]{12})\') kill -HUP $(docker exec $(docker ps | grep letsencrypt | grep -Eo \'(^[0-9a-z]{12})\') ps -o pid,args | grep master | grep -Eo \'^ +([0-9]+) +\')'
         echo 'Deployed'
@@ -59,7 +61,7 @@ pipeline {
     stage('Inntegration test') {
       steps {
         echo 'Integration testing ...'
-        sh 'docker exec -it ID yarn test-integration'
+        sh 'docker exec -it $(docker ps | grep letsencrypt | grep -Eo \'(^[0-9a-z]{12})\') yarn test-integration'
         echo 'Tested'
       }
     }
