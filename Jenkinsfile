@@ -61,7 +61,7 @@ pipeline {
     stage('Inntegration test') {
       steps {
         echo 'Integration testing ...'
-        sh 'docker exec -it $(docker ps | grep letsencrypt | grep -Eo \'(^[0-9a-z]{12})\') yarn test-integration'
+        sh 'docker exec -it $(docker ps | grep ${appName} | grep -Eo \'(^[0-9a-z]{12})\') yarn test-integration'
         echo 'Tested'
       }
     }
