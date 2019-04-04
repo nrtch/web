@@ -5,7 +5,7 @@ services:
 #-----------------------------------------------------------------------
   ${appName}:
     image: ${repoUser}/${repoName}:${appName}
-    command: PORT=8080 yarn start
+    command: PORT=8080 POSTMARK_KEY="${postmarkKey}" yarn start
     deploy:
       mode: replicated
       replicas: 2
