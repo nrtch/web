@@ -56,5 +56,12 @@ pipeline {
         echo 'Deployed'
       }
     }
+    stage('Inntegration test') {
+      steps {
+        echo 'Integration testing ...'
+        sh 'docker exec -it ID yarn test-integration'
+        echo 'Tested'
+      }
+    }
   }
 }
