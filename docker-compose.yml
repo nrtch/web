@@ -7,7 +7,7 @@ services:
     image: ${repoUser}/${repoName}:${appName}
     command: yarn start
     environment:
-      - POSTMARK_KEY="${postmarkKey}"
+      - POSTMARK_KEY=${postmarkKey}
     deploy:
       mode: replicated
       replicas: 2
