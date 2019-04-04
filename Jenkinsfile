@@ -58,14 +58,12 @@ pipeline {
         echo 'Deployed'
       }
     }
-    // stage('Integration test') {
-    //   steps {
-    //     echo 'Integration testing ...'
-    //     sh 'docker ps'
-    //     sh 'docker ps | grep ${appName}'
-    //     sh 'docker exec -it $(docker ps | grep ${appName} | grep -Eo \'(^[0-9a-z]{12})\') yarn test-integration'
-    //     echo 'Tested'
-    //   }
-    // }
+    stage('Integration test') {
+      steps {
+        echo 'Integration testing ...'
+        sh 'docker exec -it $(docker ps | grep ${appName} | grep -Eo \'(^[0-9a-z]{12})\') yarn test-integration'
+        echo 'Tested'
+      }
+    }
   }
 }
