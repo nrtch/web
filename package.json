@@ -7,18 +7,21 @@
     "dev": "node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
-    "test": "jest"
+    "test": "yarn test-unit && yarn test-e2e",
+    "test-unit": "jest '\\.test\\.js$'",
+    "test-integration": "jest server.test.js --env=node",
+    "test-e2e": "jest '\\.spec\\.js$'"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/nrtch/mobile.git"
+    "url": "git+ssh://git@github.com/nrtch/web.git"
   },
   "author": "nrtch",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/nrtch/mobile/issues"
+    "url": "https://github.com/nrtch/web/issues"
   },
-  "homepage": "https://github.com/nrtch/mobile",
+  "homepage": "https://github.com/nrtch/web",
   "dependencies": {
     "@babel/core": "^7.3.4",
     "@emotion/babel-preset-css-prop": "^10.0.9",
@@ -32,6 +35,8 @@
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "body-parser": "^1.18.3",
     "case": "^1.6.1",
+    "delay": "^4.1.0",
+    "dotenv": "^7.0.0",
     "eslint": "^5.15.1",
     "eslint-config-prettier": "^4.1.0",
     "eslint-import-resolver-babel-module": "^5.0.1",

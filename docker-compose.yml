@@ -3,9 +3,11 @@ version: '3.7'
 #-----------------------------------------------------------------------
 services:
 #-----------------------------------------------------------------------
-  nexx_me_front:
+  ${appName}:
     image: ${repoUser}/${repoName}:${appName}
-    command: yarn start -p 8080
+    command: yarn start
+    environment:
+      - POSTMARK_KEY=${postmarkKey}
     deploy:
       mode: replicated
       replicas: 2
@@ -13,7 +15,10 @@ services:
         constraints:
           - node.hostname==${deployNode}
       restart_policy:
-        condition: any
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
     networks:
       - appnet
       - webnet

@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const { parse } = require('url');
@@ -8,14 +10,12 @@ const path = require('path');
 const postmark = require('postmark');
 const { join } = path;
 
-const port = parseInt(process.env.PORT, 10) || 3000;
+const port = parseInt(process.env.PORT, 10) || 8080;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const postmarkClient = new postmark.ServerClient(
-  '547adee9-236b-4896-a354-d218a7ef6d33'
-);
+const postmarkClient = new postmark.ServerClient(process.env.POSTMARK_KEY);
 
 const faviconFiles = glob
   .sync(join(__dirname, 'static/favicon', '/**/*.*'))
