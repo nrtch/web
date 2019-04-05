@@ -10,7 +10,7 @@ describe('server works and reachable', () => {
       200
     );
     // wait a bit
-    await delay(2000);
+    await delay(1000);
     // and recheck
     await expect(axios.get('http://localhost:8080/')).resolves.toHaveProperty(
       'status',
