@@ -7,6 +7,7 @@
     "dev": "node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
+    "test": "yarn test-unit && yarn test-e2e",
     "test-unit": "jest '\\.test\\.js$'",
     "test-integration": "jest server.test.js --env=node",
     "test-e2e": "jest '\\.spec\\.js$'"
