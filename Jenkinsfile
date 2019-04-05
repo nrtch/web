@@ -62,7 +62,7 @@ pipeline {
       steps {
         echo 'Integration testing ...'
         sh 'docker ps'
-        sh 'sleep 30s'
+        sh 'sleep 1m'
         sh 'docker ps'
         sh 'docker exec -it $(docker ps | grep ${appName} | grep -Eo \'(^[0-9a-z]{12})\' -m 1) yarn test-integration'
         echo 'Tested'
