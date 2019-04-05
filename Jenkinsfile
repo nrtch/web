@@ -11,6 +11,8 @@ pipeline {
       steps {
         echo 'Setting up environment variables ...'
         script {
+          // Mode
+          env.appEnv = env.BRANCH_NAME == 'master' ? 'prod' : 'dev'
           // Unique app name
           env.appName = env.BRANCH_NAME == 'master' ? 'nexx_me_front' : 'nexx_me_front_dev'
           // App domain address
@@ -53,7 +55,7 @@ pipeline {
         sh 'cp docker-compose.yml docker-compose.yml.tmp'
         sh 'sed -e "s|\\${appName}|$appName|" docker-compose.yml.tmp > docker-compose.yml'
         sh 'rm -rf docker-compose.yml.tmp'
-        sh 'docker stack deploy --prune --with-registry-auth --compose-file docker-compose.yml apps'
+        sh 'docker stack deploy --prune --with-registry-auth --compose-file docker-compose.yml apps_${appEnv}'
         sh 'docker exec $(docker ps | grep letsencrypt | grep -Eo \'(^[0-9a-z]{12})\') kill -HUP $(docker exec $(docker ps | grep letsencrypt | grep -Eo \'(^[0-9a-z]{12})\') ps -o pid,args | grep master | grep -Eo \'^ +([0-9]+) +\')'
         echo 'Deployed'
       }
