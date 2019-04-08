@@ -22,7 +22,7 @@ pipeline {
           // Nginx configuration file
           env.nginxConf = env.BRANCH_NAME == 'master' ? 'prod.nginx.conf' : 'dev.nginx.conf'
         }
-        echo 'ENV: appEnv=${appEnv} appName=${appName} appHost=${appHost} deployNode=${deployNode} nginxConf=${nginxConf} stack=APPS_${appEnv}'
+        echo "ENV: appEnv=${appEnv} appName=${appName} appHost=${appHost} deployNode=${deployNode} nginxConf=${nginxConf} stack=APPS_${appEnv}"
       }
     }
     stage('Build') {
