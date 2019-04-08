@@ -20,6 +20,9 @@ const postmarkClient = new postmark.ServerClient(process.env.POSTMARK_KEY);
 const faviconFiles = glob
   .sync(join(__dirname, 'static/favicon', '/**/*.*'))
   .map(p => `/${path.basename(p)}`);
+const downloadableFiles = glob
+  .sync(join(__dirname, 'static/download', '/**/*.*'))
+  .map(p => `/${path.basename(p)}`);
 
 app.prepare().then(() => {
   const server = express();
@@ -47,6 +50,9 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     if (faviconFiles.includes(parsedUrl.pathname)) {
       const path = join(__dirname, 'static/favicon', parsedUrl.pathname);
+      return app.serveStatic(req, res, path);
+    } else if (downloadableFiles.includes(parsedUrl.pathname)) {
+      const path = join(__dirname, 'static/download', parsedUrl.pathname);
       return app.serveStatic(req, res, path);
     } else {
       return handle(req, res);

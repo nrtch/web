@@ -66,9 +66,7 @@ const Contacts = () => (
         </Link>
       </Column>
       <Address>
-        ООО &laquo;Нейротек&raquo; {new Date().getFullYear()}
-        <br />
-        ИНН 3906377185, КПП 390601001
+        <b>Офис разработки</b>
         <br />
         г. Калининград, ул. Театральная, 32
         <br />
