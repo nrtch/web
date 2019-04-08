@@ -63,10 +63,20 @@ pipeline {
     stage('Integration test') {
       steps {
         echo 'Integration testing ...'
+        script {
+          if (env.BRANCH_NAME == 'master') {
+            sh 'eval "$(docker-machine env prod-node-1)"'
+          }
+        }
         sh 'docker ps'
         sh 'sleep 1m'
         sh 'docker ps'
         sh 'docker exec -it $(docker ps | grep ${appName} | grep -Eo \'(^[0-9a-z]{12})\' -m 1) yarn test-integration'
+        script {
+          if (env.BRANCH_NAME == 'master') {
+            sh 'eval "$(docker-machine env -u)"'
+          }
+        }
         echo 'Tested'
       }
     }
