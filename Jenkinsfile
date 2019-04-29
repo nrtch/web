@@ -22,7 +22,7 @@ pipeline {
           // Nginx configuration file
           env.nginxConf = env.BRANCH_NAME == 'master' ? 'prod.nginx.conf' : 'dev.nginx.conf'
         }
-        echo "ENV: appEnv=${appEnv} appName=${appName} appHost=${appHost} deployNode=${deployNode} nginxConf=${nginxConf} stack=APPS_${appEnv}"
+        echo "ENV: appName=${appName} appHost=${appHost} deployNode=${deployNode} nginxConf=${nginxConf} stack=APPS_${appEnv}"
       }
     }
     stage('Build') {
@@ -56,7 +56,7 @@ pipeline {
         sh 'cp docker-compose.yml docker-compose.yml.tmp'
         sh 'sed -e "s|\\${appName}|$appName|" docker-compose.yml.tmp > docker-compose.yml'
         sh 'rm -rf docker-compose.yml.tmp'
-        sh 'docker stack deploy --prune --with-registry-auth --compose-file docker-compose.yml APPS_${appEnv}'
+        sh 'docker stack deploy --prune --with-registry-auth --compose-file docker-compose.yml APPS_${appName}'
         sh 'docker exec $(docker ps | grep letsencrypt | grep -Eo \'(^[0-9a-z]{12})\') kill -HUP $(docker exec $(docker ps | grep letsencrypt | grep -Eo \'(^[0-9a-z]{12})\') ps -o pid,args | grep master | grep -Eo \'^ +([0-9]+) +\')'
         echo 'Deployed'
       }
