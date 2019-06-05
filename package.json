@@ -36,7 +36,7 @@
     "body-parser": "^1.18.3",
     "case": "^1.6.1",
     "delay": "^4.1.0",
-    "dotenv": "^7.0.0",
+    "dotenv": "^8.0.0",
     "eslint": "^5.15.1",
     "eslint-config-prettier": "^4.1.0",
     "eslint-import-resolver-babel-module": "^5.0.1",
