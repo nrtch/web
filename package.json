@@ -59,7 +59,7 @@
     "next-fonts": "^0.17.0",
     "next-images": "^1.1.1",
     "postmark": "^2.2.4",
-    "prettier": "^1.16.4",
+    "prettier": "^1.17.1",
     "react": "^16.8.4",
     "react-dom": "^16.8.4"
   }
