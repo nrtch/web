@@ -30,7 +30,7 @@
     "@zeit/next-css": "^1.0.1",
     "axios": "^0.19.0",
     "babel-eslint": "^10.0.1",
-    "babel-plugin-emotion": "^10.0.9",
+    "babel-plugin-emotion": "^10.0.17",
     "babel-plugin-module-resolver": "^3.2.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "body-parser": "^1.18.3",
