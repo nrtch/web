@@ -8,8 +8,8 @@ import Head from 'next/head';
 // import { Global, css } from '@emotion/core';
 import styled from '@emotion/styled';
 
-import BackBar from 'controls/BackBar';
-import StartForm from 'sections/StartForm';
+import BackBar from '../components/controls/BackBar';
+import StartForm from '../components/sections/StartForm';
 
 const breakpoints = [768, 992, 1200, 1400, 1600];
 const mq = breakpoints.map(bp => `@media (min-width: ${bp}px)`);

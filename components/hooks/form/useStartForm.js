@@ -4,13 +4,20 @@
  */
 
 import * as React from 'react';
+import axios from 'axios';
 
-import start from 'api/start';
 import useEmailField from './useEmailField';
 import usePhoneField from './usePhoneField';
 import useNameField from './useNameField';
 
 const { useState, useRef, useEffect } = React;
+
+const start = (
+  name: string,
+  phone: string,
+  email: string,
+  params: { [string]: any }
+) => axios.post('/api/register', { name, phone, email, ...params });
 
 const validateForm = (fields: { validSync: boolean }[]) => {
   for (let i = 0; i < fields.length; i++) {

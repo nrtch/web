@@ -9,7 +9,7 @@ type Props = {
   color?: string,
 };
 
-const Check = ({ color = '#00A3FF', ...rest }: Props) => (
+const Chevron = ({ color = 'current', ...rest }: Props) => (
   <svg
     width="18"
     height="13"
@@ -22,4 +22,4 @@ const Check = ({ color = '#00A3FF', ...rest }: Props) => (
   </svg>
 );
 
-export default Check;
+export default Chevron;

@@ -11,7 +11,7 @@ const margin = 40;
 
 const Row = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${props => (props.colReverse ? 'column-reverse' : 'column')};
   align-items: ${props => (props.align ? 'flex-start' : 'center')};
   ${mq[0]} {
     flex-direction: ${props => (props.reverse ? 'row-reverse' : 'row')};

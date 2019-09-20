@@ -5,6 +5,22 @@
 [libs]
 
 [lints]
+all=warn
+; sketchy-null=warn
+; sketchy-number=warn
+; untyped-type-import=warn
+untyped-import=off
+inexact-spread=off
+; unclear-type=warn
+; unsafe-getters-setters=warn
+; deprecated-declare-exports=warn
+; nonstrict-import=warn
+; unnecessary-optional-chain=warn
+; unnecessary-invariant=warn
+; deprecated-utility=warn
+; dynamic-export=warn
+; non-array-spread=warn
+; implicit-inexact-object=warn
 
 [options]
 emoji=true
@@ -21,4 +37,4 @@ module.system.node.resolve_dirname=./
 [strict]
 
 [version]
-^0.94.0
+^0.108.0
