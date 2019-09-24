@@ -9,7 +9,10 @@ import styled from '@emotion/styled';
 import Section from '../controls/Section';
 import SectionTitle from '../controls/SectionTitle';
 import Member from '../controls/Member';
-import pic from './keanu.jpg';
+import Alex from './Alex.jpg';
+import Artem from './Artem.jpg';
+import Ivan from './Ivan.jpg';
+import Nick from './Nick.jpg';
 
 const breakpoints = [860, 1200];
 const mq = breakpoints.map(bp => `@media (min-width: ${bp}px)`);
@@ -19,18 +22,18 @@ const Team = () => (
   <Section>
     <SectionTitle>Команда</SectionTitle>
     <Content>
-      <Member name="Алексей Афанасьев" role="CEO" image={pic}>
+      <Member name="Алексей Афанасьев" role="CEO" image={Alex}>
         профессиональный трейдер, автор алгоритма, 8 лет опыта в трейдинге, опыт
         управления капиталом $1М
       </Member>
-      <Member name="Артём Титаренко" role="CTO" image={pic}>
+      <Member name="Артём Титаренко" role="CTO" image={Artem}>
         разработчик алгоритма, 10+ лет в разработке автоматических торговых
         систем
       </Member>
-      <Member name="Иван Фирсов" role="DEV" image={pic}>
+      <Member name="Иван Фирсов" role="DEV" image={Ivan}>
         разработчик сайта и мобильного приложения
       </Member>
-      <Member name="Николай Гутыро" role="DEV" image={pic}>
+      <Member name="Николай Гутыро" role="DEV" image={Nick}>
         серверный разработчик
       </Member>
     </Content>

@@ -47,11 +47,12 @@ const Mobile = () => (
     <Row stretch>
       <CouplaPhones style={styles.phones} />
       <Column>
-        <SectionTitle css={styles.title}>Всегда под рукой</SectionTitle>
+        <SectionTitle>Всегда под рукой</SectionTitle>
         <Text short>
-          Мы работаем открыто и честно. Вся торговая история а также текущие
-          открытые сделки доступны в приложениях NEXX, MetaTrader и портале
-          Myfxbook
+          Мы работаем открыто и честно. Вся торговая история и текущие открытые
+          сделки доступны в приложении MetaTrader и на портале Myfxbook. А еще у
+          нас в разработке официальное приложение NEXX, которое скоро станет
+          доступно.
         </Text>
         <Buttons>
           {platform !== 'android' && <AppStoreButton />}
