@@ -7,8 +7,8 @@ import * as React from 'react';
 import Head from 'next/head';
 import styled from '@emotion/styled';
 
-import BackBar from 'controls/BackBar';
-import { fadeIn } from 'styles/animations';
+import BackBar from '../components/controls/BackBar';
+import { fadeIn } from '../components/styles/animations';
 
 const H1 = styled.h1`
   font-weight: 500;

@@ -5,16 +5,6 @@
   ],
   "plugins": [
     "transform-flow-strip-types",
-    "emotion",
-    [
-      "module-resolver",
-      {
-        "root": ["./components"],
-        "alias": {
-          "helpers": "./helpers",
-          "api": "./api",
-        },
-      }
-    ]
+    "emotion"
   ]
 }
