@@ -10,12 +10,6 @@ import { css } from '@emotion/core';
 const breakpoints = [768, 992, 1200];
 const mq = breakpoints.map(bp => `@media (min-width: ${bp}px)`);
 
-type Props = {
-  label: string,
-  value: string,
-  style?: any,
-};
-
 const container = css`
   & + & {
     margin-top: 40px;
@@ -46,6 +40,15 @@ const Label = styled.div`
     letter-spacing: 0;
   }
 `;
+const BottomLabel = styled.div`
+  /* font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier,
+    monospace;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  ${mq[0]} {
+    letter-spacing: 0;
+  } */
+`;
 const Value = styled.div`
   font-weight: 200;
   font-size: 2.625em;
@@ -53,10 +56,18 @@ const Value = styled.div`
   margin-top: 8px;
 `;
 
-const Fact = ({ label, value, style, ...rest }: Props) => (
+type Props = {
+  label?: string,
+  value: string,
+  bottomLabel?: string,
+  style?: any,
+};
+
+const Fact = ({ label, value, bottomLabel, style, ...rest }: Props) => (
   <div css={[container, style]} {...rest}>
-    <Label>{label}</Label>
+    {label && <Label>{label}</Label>}
     <Value>{value}</Value>
+    {bottomLabel && <BottomLabel>{bottomLabel}</BottomLabel>}
   </div>
 );
 

@@ -7,13 +7,15 @@ import * as React from 'react';
 import Head from 'next/head';
 import { Global, css } from '@emotion/core';
 
-import Intro from 'sections/Intro';
-import Facts from 'sections/Facts';
-import Mobile from 'sections/Mobile';
-import Support from 'sections/Support';
-import End from 'sections/End';
-import Contacts from 'sections/Contacts';
-import Thanks from 'controls/Thanks';
+import Intro from '../components/sections/Intro';
+import Facts from '../components/sections/Facts';
+import Mobile from '../components/sections/Mobile';
+import Support from '../components/sections/Support';
+import End from '../components/sections/End';
+import Footer from '../components/sections/Footer';
+import Thanks from '../components/controls/Thanks';
+import Faq from '../components/sections/Faq';
+import Team from '../components/sections/Team';
 
 const { useState, useEffect } = React;
 
@@ -58,8 +60,10 @@ const Home = () => {
       <Facts />
       <Mobile />
       <Support />
+      <Faq />
+      <Team />
       <End />
-      <Contacts />
+      <Footer />
       {thanks && <Thanks done={done} />}
     </>
   );

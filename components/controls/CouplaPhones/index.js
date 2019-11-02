@@ -9,16 +9,24 @@ import styled from '@emotion/styled';
 
 import Phone from '../Phone';
 import detailsPng from './details.png';
-import ordersPng from './orders.png';
 import details from './details.webp';
+import ordersPng from './orders.png';
 import orders from './orders.webp';
+import mtPng from './mt.png';
+import mt from './mt.webp';
+import myfxbookPng from './myfxbook.png';
+import myfxbook from './myfxbook.webp';
 
 const screens = [
+  { image: mt, fallback: mtPng },
   { image: details, fallback: detailsPng },
+];
+const alternateScreens = [
+  { image: myfxbook, fallback: myfxbookPng },
   { image: orders, fallback: ordersPng },
 ];
-const alternateScreens = screens.concat();
-alternateScreens.reverse();
+// const alternateScreens = screens.concat();
+// alternateScreens.reverse();
 
 const breakpoints = [768, 992, 1200];
 const mq = breakpoints.map(bp => `@media (min-width: ${bp}px)`);
